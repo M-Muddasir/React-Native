@@ -1,4 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View, FlatList } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
 
 const COLORS = [
   { colorName: "Base03", hexCode: "#002b36" },
@@ -43,6 +44,7 @@ const Colors = ({ colorName, hexCode }) => {
 
 export default function App() {
   return (
+    <NavigationContainer>
     <SafeAreaView style={styles.container}>
       <FlatList
         style={{ padding: 20 }}
@@ -54,6 +56,7 @@ export default function App() {
         ListHeaderComponent={<Text style={styles.heading}>Solarized</Text>}
       />
     </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
