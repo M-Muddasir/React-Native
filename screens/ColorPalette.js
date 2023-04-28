@@ -1,33 +1,33 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import React from 'react';
+import { FlatList, StyleSheet, Text } from 'react-native';
+import ColorBox from '../Components/ColorBox';
 
-import ColorBox from "../Components/ColorBox";
-
-const ColorPalette = ({ route, navigation }) => {
-  
-  const { paletteName, colors } = route.params;
-
-  useEffect(() => {
-    navigation.setOptions({ title: paletteName });
-  }, [paletteName, navigation]);
-
-
+const ColorPalette = ({ route }) => {
+  const { colors, paletteName } = route.params;
   return (
     <FlatList
-      style={{ paddingHorizontal:10,  backgroundColor: "white" }}
+      keyExtractor={item => item.colorName}
+      style={styles.container}
       data={colors}
-      keyExtractor={(item, index) => index.toString()}
       renderItem={({ item }) => (
         <ColorBox colorName={item.colorName} hexCode={item.hexCode} />
       )}
+      ListHeaderComponent={<Text style={styles.text}>{paletteName}</Text>}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  heading: {
-    fontWeight: "bold",
-    fontSize: 19,
+  container: {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    backgroundColor: 'white',
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
 });
+
 export default ColorPalette;

@@ -1,35 +1,41 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 const ColorBox = ({ colorName, hexCode }) => {
-  const colorStyle = {
+  const boxColor = {
     backgroundColor: hexCode,
   };
   const textColor = {
     color:
-      parseInt(hexCode.replace("#", ""), 16) > 0xffffff / 1.1
-        ? "black"
-        : "white",
+      parseInt(hexCode.replace('#', ''), 16) > 0xffffff / 1.1
+        ? 'black'
+        : 'white',
   };
   return (
-    <SafeAreaView style={{marginVertical:-13}}>
-      <View style={colorStyle}>
-        <Text style={[styles.textDexoration, textColor]}>
-          {colorName}: {hexCode}
-        </Text>
-      </View>
-    </SafeAreaView>
+    <View style={[styles.box, boxColor]}>
+      <Text style={[styles.boxText, textColor]}>
+        {colorName}: {hexCode}
+      </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  textDexoration: {
-    textAlign: "center",
-    paddingVertical: 5,
-    marginVertical: 5,
-    fontWeight: "bold",
-    color: "white",
+  box: {
+    padding: 10,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 1,
+    elevation: 2,
+  },
+  boxText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
