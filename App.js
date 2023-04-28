@@ -2,7 +2,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from "./screens/Home";
 import ColorPalette from "./screens/ColorPalette";
 import { createStackNavigator } from "@react-navigation/stack";
-
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -10,7 +9,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="ColorPalette" component={ColorPalette} />
+        <Stack.Screen name="ColorPalette" component={ColorPalette}  options={{ title: 'My home' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
