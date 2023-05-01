@@ -1,8 +1,9 @@
 import React,{useState, useEffect,useCallback} from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity,Text } from 'react-native';
 import PalettePreview from '../Components/PalettePreview';
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation,route }) => {
+  const newColorPalette=route.params?.newColorPalette;
   const [colorPalettes,setColorPalettes]=useState([]);
   const [isRefreshing,setIsRefreshing]=useState(false);
 
@@ -19,6 +20,11 @@ const Home = ({ navigation }) => {
     fetchColorsPalettes();
   },[])
 
+  useEffect(()=>{
+    if(newColorPalette){
+      setColorPalettes(palettes =>[newColorPalette,...palettes]);
+    }
+  },[newColorPalette])
   const handleRefresh = useCallback (()=>{
     setIsRefreshing(true);
     fetchColorsPalettes();
@@ -40,6 +46,13 @@ const Home = ({ navigation }) => {
       )}
           refreshing = {isRefreshing}
           onRefresh={handleRefresh}
+          ListHeaderComponent={
+            <TouchableOpacity onPress = {()=>{
+              navigation.navigate('AddNewColorPalette');
+            }}>
+              <Text style={styles.buttonTxt}>Add a color scheme</Text>
+            </TouchableOpacity>
+          }
     />
   );
 };
@@ -49,6 +62,12 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
   },
+  buttonTxt:{
+    fontSize:18,
+    fontWeight:'bold',
+    color:'teal',
+    marginBottom:10
+  }
 });
 
 export default Home;
